@@ -1,5 +1,6 @@
 "use client";
-
+  import { useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 import { translateToUrdu } from "@/lib/translateToUrdu";
 import { simulateSummary } from "@/lib/simulateSummary";
 
@@ -22,4 +23,20 @@ export default function SummaryCard({ text }: { text: string }) {
       </div>
     </div>
   );
+useEffect(() => {
+  async function saveSummary() {
+    const { error } = await supabase.from("summaries").insert([
+      { original: summary, urdu: translated },
+    ]);
+
+    if (error) {
+      console.error("❌ Failed to save to Supabase:", error.message);
+    } else {
+      console.log("✅ Saved to Supabase");
+    }
+  }
+
+  saveSummary();
+}, [summary, translated]);
+
 }
