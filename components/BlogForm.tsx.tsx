@@ -11,7 +11,7 @@ export default function BlogForm() {
   const [blogText, setBlogText] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!url.trim()) return;
 
@@ -21,8 +21,8 @@ export default function BlogForm() {
 
       const response = await fetch("/api/scrape", {
         method: "POST",
-        body: JSON.stringify({ url }),
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
       });
 
       if (!response.ok) throw new Error("Failed to fetch blog content");
@@ -51,11 +51,7 @@ export default function BlogForm() {
             className="bg-blue-50 focus:ring-2 focus:ring-blue-400"
           />
         </div>
-        <Button
-          type="submit"
-          disabled={!url.trim()}
-          className="w-full"
-        >
+        <Button type="submit" disabled={!url.trim()} className="w-full">
           🔍 Summarise Blog
         </Button>
       </form>

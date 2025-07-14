@@ -36,7 +36,7 @@ const handleBlogSubmit = async (url: string) => {
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-100 flex items-center justify-center px-4">
       <div className="bg-white p-8 rounded-2xl shadow-lg max-w-xl w-full border border-gray-200">
         <h1 className="text-3xl font-bold mb-6 text-center text-blue-800">📰 Blog Summariser</h1>
-        <BlogForm onSubmit={handleBlogSubmit} />
+        <BlogForm />
         {blogText && (
           <div className="mt-6">
             <h2 className="text-xl font-semibold mb-2">📄 Extracted Blog Text</h2>
